@@ -1,0 +1,28 @@
+# Indexify Extractor
+
+This repositories contains the structured extractors for Indexify[https://getindexify.ai]. 
+
+
+## Contribute a New Extractor
+
+Create a new extractor by running the command below 
+
+```bash
+indexify extractors new <extractor-name>
+```
+
+## Test Extractors 
+Once you have written an extractor you can test it by running the command below
+
+```bash
+indexify extractor extract --path /path/to/extractor.py:MyExtractorName --text "hello world"
+```
+
+
+## Package the Extractor 
+```bash
+indexify extractor package 
+```
+
+## Publish to the hub
+Send a PR of your extractor to this repository. Once we validate the extractor, we will list the extractor on the hub.tensorlake.ai
