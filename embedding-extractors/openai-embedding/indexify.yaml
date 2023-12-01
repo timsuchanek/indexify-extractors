@@ -1,0 +1,9 @@
+name: lucas/openai-embedding-ada-002-extractor
+version: 1
+description: "OpenAI Embedding extractor"
+module: openai_embedding:OpenAIEmbedding
+gpu: false
+python_dependencies:
+  - openai
+system_dependencies:
+  - curl
