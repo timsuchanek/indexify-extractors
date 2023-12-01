@@ -15,6 +15,7 @@ class LanguageExtractionInputParams(BaseModel):
     overlap: int = 0
     text_splitter: Literal["char", "token", "recursive", "new_line"] = "new_line"
 
+
 class LanguageExtractor(Extractor):
     """
     Extractor class for detecting the language of given content.
@@ -31,14 +32,18 @@ class LanguageExtractor(Extractor):
         out = []
         for i, x in enumerate(content):
             language = self._model.detect_language_of(content_texts[i])
-            confidence = self._model.compute_language_confidence(content_texts[i], language)
+            confidence = self._model.compute_language_confidence(
+                content_texts[i], language
+            )
             # TODO: Could be modified depending on the database we have
             data = {"language": language.name, "score": str(confidence)}
             out.append(
-                [Content.from_text(
-                    text=content_texts[i],
-                    feature=Feature.metadata(value=data, name="language"),
-                )]
+                [
+                    Content.from_text(
+                        text=content_texts[i],
+                        feature=Feature.metadata(value=data, name="language"),
+                    )
+                ]
             )
         return out
 
@@ -50,7 +55,6 @@ class LanguageExtractor(Extractor):
         # TODO If it's metadata, how do we extract things
         # This extractor does not return any embedding, only a dictionary!
         return ExtractorSchema(
-            embedding_schemas={},
             input_params=json.dumps(input_params.model_json_schema()),
+            output_schemas={},
         )
-

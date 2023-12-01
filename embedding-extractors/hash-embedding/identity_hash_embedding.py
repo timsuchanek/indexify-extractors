@@ -2,17 +2,21 @@ import hashlib
 import numpy as np
 from typing import List
 
-from indexify_extractor_sdk import (ExtractorSchema, EmbeddingSchema)
-from indexify_extractor_sdk.base_embedding import (BaseEmbeddingExtractor, EmbeddingInputParams)
+from indexify_extractor_sdk import ExtractorSchema, EmbeddingSchema
+from indexify_extractor_sdk.base_embedding import (
+    BaseEmbeddingExtractor,
+    EmbeddingInputParams,
+)
+
 
 class IdentityHashEmbedding(BaseEmbeddingExtractor):
     """
-        Implements a Hash Extractor, which can be used to find duplicates within the dataset.
-        It hashes the text into bytes, and interprets these are a numpy array.
+    Implements a Hash Extractor, which can be used to find duplicates within the dataset.
+    It hashes the text into bytes, and interprets these are a numpy array.
 
-        We can extend this by LocalitySensitiveHashing, to also account for small perturbations in the input bytes.
+    We can extend this by LocalitySensitiveHashing, to also account for small perturbations in the input bytes.
 
-        This is equivalent to an identity mapping (with the sample-size n large enough, there will be collisions, but this is highly unlikely )
+    This is equivalent to an identity mapping (with the sample-size n large enough, there will be collisions, but this is highly unlikely )
     """
 
     def __init__(self):
@@ -28,13 +32,13 @@ class IdentityHashEmbedding(BaseEmbeddingExtractor):
         input_params = EmbeddingInputParams()
         return ExtractorSchema(
             input_params=input_params.model_dump_json(),
-            embedding_schemas={
+            output_schemas={
                 "embedding": EmbeddingSchema(distance_metric="cosine", dim=32)
             },
         )
 
     def _embed(self, text) -> List[float]:
         model = hashlib.sha256()
-        model.update(bytes(text, 'utf-8'))
+        model.update(bytes(text, "utf-8"))
         out = model.digest()
         return np.frombuffer(out, dtype=np.int8).tolist()

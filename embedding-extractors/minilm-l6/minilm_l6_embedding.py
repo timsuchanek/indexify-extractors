@@ -26,7 +26,7 @@ class MiniLML6Extractor(BaseEmbeddingExtractor):
         input_params = EmbeddingInputParams()
         return ExtractorSchema(
             input_params=input_params.model_dump_json(),
-            embedding_schemas={
+            output_schemas={
                 "embedding": EmbeddingSchema(distance_metric="cosine", dim=384)
             },
         )

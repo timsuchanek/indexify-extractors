@@ -32,7 +32,7 @@ Example output:
 Try out the extractor. Write your favorite (foreign) quote.
 
 ```bash
-cd text-lid
+cd invoice-extractor
 indexify extractor extract --file invoice.pdf
 ```
 
@@ -41,5 +41,5 @@ indexify extractor extract --file invoice.pdf
 * The container is not published yet. *
 
 ```bash
-docker run  -it yenicelik/simple-invoice-parser --file invoice.pdf
+docker run  -it yenicelik/simple-invoice-parser extractor extract --file invoice.pdf
 ```
