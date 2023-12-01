@@ -29,7 +29,7 @@ Example output:
 Try out the extractor. Write your favorite (foreign) quote.
 
 ```bash
-cd text-lid
+cd invoice-extractor
 indexify extractor extract --text "The quick brown fox jumps over the lazy dog."
 ```
 
@@ -38,5 +38,5 @@ indexify extractor extract --text "The quick brown fox jumps over the lazy dog."
 * The container is not published yet. *
 
 ```bash
-docker run  -it yenicelik/identity-hash-extractor --text "The quick brown fox jumps over the lazy dog."
+docker run  -it yenicelik/identity-hash-extractor extractor extract --text "The quick brown fox jumps over the lazy dog."
 ```

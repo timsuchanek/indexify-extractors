@@ -28,7 +28,7 @@ Example output:
 Try out the extractor. Write your favorite (foreign) quote.
 
 ```bash
-cd text-lid
+cd minilm-l6
 indexify extractor extract --text "The quick brown fox jumps over the lazy dog."
 ```
 
@@ -37,5 +37,5 @@ indexify extractor extract --text "The quick brown fox jumps over the lazy dog."
 * The container is not published yet. *
 
 ```bash
-docker run  -it diptanu/minilm-l6-extractor --text "The quick brown fox jumps over the lazy dog."
+docker run  -it diptanu/minilm-l6-extractor extractor extract --text "The quick brown fox jumps over the lazy dog."
 ```

@@ -8,6 +8,7 @@ gpu: false
 python_dependencies:
   - librosa
   - soundfile
+  - accelerate
 # Add all the system dependencies here. We use a ubuntu base image, so the package names
 # should be available in ubuntu
 system_dependencies:
