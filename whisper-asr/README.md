@@ -15,5 +15,5 @@ indexify extractor extract --file twiml-ai-podcast.mp3
 ## Container
 * The container is not published yet. *
 ```
-docker run  -it diptanu/whisper-asr extract --file all-in-e154.mp3
+docker run  -it diptanu/whisper-asr extractor extract --file all-in-e154.mp3
 ```
