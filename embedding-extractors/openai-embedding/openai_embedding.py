@@ -9,6 +9,8 @@ from indexify_extractor_sdk.base_embedding import (
 from openai import OpenAI
 import os
 
+os.environ["OPENAI_API_KEY"] = ""
+
 
 class OpenAIEmbedding(BaseEmbeddingExtractor):
     def __init__(self):
@@ -17,11 +19,8 @@ class OpenAIEmbedding(BaseEmbeddingExtractor):
         self.client = OpenAI()
 
     def extract_embeddings(self, texts: List[str]) -> List[List[float]]:
-        return (
-            self.client.embeddings.create(input=texts, model=self.model_name)
-            .data[0]
-            .embedding
-        )
+        embeddings = self.client.embeddings.create(input=texts, model=self.model_name)
+        return [data.embedding for data in embeddings.data]
 
     def extract_query_embeddings(self, query: str) -> List[float]:
         return (
