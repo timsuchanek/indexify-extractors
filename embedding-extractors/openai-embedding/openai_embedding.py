@@ -7,9 +7,6 @@ from indexify_extractor_sdk.base_embedding import (
 )
 
 from openai import OpenAI
-import os
-
-os.environ["OPENAI_API_KEY"] = ""
 
 
 class OpenAIEmbedding(BaseEmbeddingExtractor):
