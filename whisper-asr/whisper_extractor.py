@@ -68,8 +68,8 @@ class WhisperExtractor(Extractor):
         Returns a list of options for indexing.
         """
         return ExtractorSchema(
-            output_schemas={},
             input_params=json.dumps(InputParams.model_json_schema()),
+            output_schemas={},
         )
 
 
