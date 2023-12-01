@@ -37,7 +37,7 @@ Example output:
 Try out the extractor. Write your favorite (foreign) quote.
 
 ```bash
-cd text-lid
+cd openai-embedding
 indexify extractor extract --text "The quick brown fox jumps over the lazy dog."
 ```
 
