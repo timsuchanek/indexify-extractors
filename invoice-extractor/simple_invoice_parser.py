@@ -24,11 +24,16 @@ class SimpleInvoiceParserInputParams(BaseModel):
     # No input except the file itself
     ...
 
+
 class SimpleInvoiceParserExtractor(Extractor):
     def __init__(self):
         super().__init__()
-        self.processor = DonutProcessor.from_pretrained("to-be/donut-base-finetuned-invoices")
-        self.model = VisionEncoderDecoderModel.from_pretrained("to-be/donut-base-finetuned-invoices")
+        self.processor = DonutProcessor.from_pretrained(
+            "to-be/donut-base-finetuned-invoices"
+        )
+        self.model = VisionEncoderDecoderModel.from_pretrained(
+            "to-be/donut-base-finetuned-invoices"
+        )
         # TODO: Is this for example how we would pick it up? Probably the model would still need to be defined by the user i.e. how it should be used
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.model.to(self.device)
@@ -39,7 +44,9 @@ class SimpleInvoiceParserExtractor(Extractor):
 
         # prepare decoder inputs
         task_prompt = "<s_cord-v2>"
-        decoder_input_ids = self.processor.tokenizer(task_prompt, add_special_tokens=False, return_tensors="pt").input_ids
+        decoder_input_ids = self.processor.tokenizer(
+            task_prompt, add_special_tokens=False, return_tensors="pt"
+        ).input_ids
 
         # generate answer
         outputs = self.model.generate(
@@ -57,8 +64,12 @@ class SimpleInvoiceParserExtractor(Extractor):
 
         # postprocess
         sequence = self.processor.batch_decode(outputs.sequences)[0]
-        sequence = sequence.replace(self.processor.tokenizer.eos_token, "").replace(self.processor.tokenizer.pad_token, "")
-        sequence = re.sub(r"<.*?>", "", sequence, count=1).strip()  # remove first task start token
+        sequence = sequence.replace(self.processor.tokenizer.eos_token, "").replace(
+            self.processor.tokenizer.pad_token, ""
+        )
+        sequence = re.sub(
+            r"<.*?>", "", sequence, count=1
+        ).strip()  # remove first task start token
         return self.processor.token2json(sequence), image
 
     def extract(
@@ -72,12 +83,18 @@ class SimpleInvoiceParserExtractor(Extractor):
         out = []
         for i, x in enumerate(content):
             print("i, x are: ", i, x)
-            data = self._process_document(images[i])[0]  # Key 1 includes the image, which we ignore in this case
+            data = self._process_document(images[i])[
+                0
+            ]  # Key 1 includes the image, which we ignore in this case
             out.append(
-                [Content.from_text(
-                    text="",  # TODO: Diptanu, what do we do for PDFs? Do you want to save the raw bytes too, I feel like this is unnecessary? Also, I felt like these would be stored in a database _before_ processing, not after
-                    feature=Feature.metadata(value=data, name="invoice_simple_donut"),
-                )]
+                [
+                    Content.from_text(
+                        text="",  # TODO: Diptanu, what do we do for PDFs? Do you want to save the raw bytes too, I feel like this is unnecessary? Also, I felt like these would be stored in a database _before_ processing, not after
+                        feature=Feature.metadata(
+                            value=data, name="invoice_simple_donut"
+                        ),
+                    )
+                ]
             )
         return out
 
@@ -89,7 +106,6 @@ class SimpleInvoiceParserExtractor(Extractor):
         # TODO If it's metadata, how do we extract things
         # This extractor does not return any embedding, only a dictionary!
         return ExtractorSchema(
-            embedding_schemas={},
             input_params=json.dumps(input_params.model_json_schema()),
+            output_schemas={},
         )
-
