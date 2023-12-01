@@ -9,9 +9,9 @@ from indexify_extractor_sdk.base_embedding import (
 from openai import OpenAI
 
 
-class OpenAIEmbedding(BaseEmbeddingExtractor):
+class OpenAIEmbeddingExtractor(BaseEmbeddingExtractor):
     def __init__(self):
-        super(OpenAIEmbedding, self).__init__(max_context_length=128)
+        super(OpenAIEmbeddingExtractor, self).__init__(max_context_length=128)
         self.model_name = "text-embedding-ada-002"
         self.client = OpenAI()
 
