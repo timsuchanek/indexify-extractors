@@ -29,10 +29,8 @@ class IdentityHashEmbedding(BaseEmbeddingExtractor):
         return self._embed(query)
 
     def schemas(self) -> ExtractorSchema:
-        input_params = EmbeddingInputParams()
         return ExtractorSchema(
-            input_params=input_params.model_dump_json(),
-            output_schemas={
+            features={
                 "embedding": EmbeddingSchema(distance_metric="cosine", dim=32)
             },
         )

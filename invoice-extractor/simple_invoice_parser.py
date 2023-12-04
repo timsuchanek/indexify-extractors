@@ -106,6 +106,5 @@ class SimpleInvoiceParserExtractor(Extractor):
         # TODO If it's metadata, how do we extract things
         # This extractor does not return any embedding, only a dictionary!
         return ExtractorSchema(
-            input_params=json.dumps(input_params.model_json_schema()),
-            output_schemas={},
+                features={}
         )

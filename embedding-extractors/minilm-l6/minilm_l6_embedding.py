@@ -23,10 +23,8 @@ class MiniLML6Extractor(BaseEmbeddingExtractor):
         return self._model.embed_query(query)
 
     def schemas(self) -> ExtractorSchema:
-        input_params = EmbeddingInputParams()
         return ExtractorSchema(
-            input_params=input_params.model_dump_json(),
-            output_schemas={
+            features={
                 "embedding": EmbeddingSchema(distance_metric="cosine", dim=384)
             },
         )
@@ -36,4 +34,4 @@ if __name__ == "__main__":
     extractor = MiniLML6Extractor()
     print(extractor.schemas())
     print(extractor.extract_query_embeddings("Hello World"))
-    print(extractor.extract([Content.from_text(text="Hello World")], {}))
+    print(extractor.extract([Content.from_text(text="Hello World")], EmbeddingInputParams()))
