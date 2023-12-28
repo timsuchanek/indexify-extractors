@@ -18,7 +18,8 @@ class JinaEmbeddingsBase(BaseEmbeddingExtractor):
     def extract_embeddings(self, texts: List[str]) -> List[List[float]]:
         return self._model.encode(texts).tolist()
 
-    def schemas(self) -> ExtractorSchema:
+    @classmethod
+    def schemas(cls) -> ExtractorSchema:
         return ExtractorSchema(
             features={
                 "embedding": EmbeddingSchema(distance_metric="cosine", dim=768)

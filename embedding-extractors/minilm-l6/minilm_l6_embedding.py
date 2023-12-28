@@ -19,10 +19,8 @@ class MiniLML6Extractor(BaseEmbeddingExtractor):
     def extract_embeddings(self, texts: List[str]) -> List[List[float]]:
         return self._model.embed_ctx(texts)
 
-    def extract_query_embeddings(self, query: str) -> List[float]:
-        return self._model.embed_query(query)
-
-    def schemas(self) -> ExtractorSchema:
+    @classmethod
+    def schemas(cls) -> ExtractorSchema:
         return ExtractorSchema(
             features={
                 "embedding": EmbeddingSchema(distance_metric="cosine", dim=384)
@@ -33,5 +31,4 @@ class MiniLML6Extractor(BaseEmbeddingExtractor):
 if __name__ == "__main__":
     extractor = MiniLML6Extractor()
     print(extractor.schemas())
-    print(extractor.extract_query_embeddings("Hello World"))
     print(extractor.extract([Content.from_text(text="Hello World")], EmbeddingInputParams()))
