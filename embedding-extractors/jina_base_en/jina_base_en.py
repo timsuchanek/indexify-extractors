@@ -22,7 +22,7 @@ class JinaEmbeddingsBase(BaseEmbeddingExtractor):
     def schemas(cls) -> ExtractorSchema:
         return ExtractorSchema(
             features={
-                "embedding": EmbeddingSchema(distance_metric="cosine", dim=768)
+                "embedding": EmbeddingSchema(distance_metric="cosine", dim=2048)
             },
         )
 
