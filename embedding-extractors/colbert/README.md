@@ -1,6 +1,6 @@
 # Colbert v2 Embedding Extractor
 
-This extractor extractors an embedding for a piece of text.
+This extractor extracts an embedding for a piece of text.
 It uses the huggingface [Colbert v2 model](https://huggingface.co/colbert-ir/colbertv2.0) It encodes each passage into a matrix of token-level embeddings (shown above in blue). Then at search time, it embeds every query into another matrix (shown in green) and efficiently finds passages that contextually match the query using scalable vector-similarity (MaxSim) operators.
 
 Example input:
