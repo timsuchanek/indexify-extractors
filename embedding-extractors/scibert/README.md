@@ -45,3 +45,15 @@ indexify extractor extract --text "Scientific discovery is fascinating"
 ```bash
 docker run  -it indexify-extractors/scibert extractor extract --text "Scientific discovery is fascinating"
 ```
+Citation:
+
+```bibtex
+@inproceedings{beltagy-etal-2019-scibert,
+    title = "SciBERT: A Pretrained Language Model for Scientific Text",
+    author = "Beltagy, Iz  and Lo, Kyle  and Cohan, Arman",
+    booktitle = "EMNLP",
+    year = "2019",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/D19-1371"
+}
+```
