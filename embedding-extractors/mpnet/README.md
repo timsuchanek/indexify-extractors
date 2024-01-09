@@ -1,12 +1,13 @@
-# Colbert v2 Embedding Extractor
+# MPNET Multilingual Base V2
 
-This extractor extracts an embedding for a piece of text.
-It uses the huggingface [Colbert v2 model](https://huggingface.co/colbert-ir/colbertv2.0) It encodes each passage into a matrix of token-level embeddings (shown above in blue). Then at search time, it embeds every query into another matrix (shown in green) and efficiently finds passages that contextually match the query using scalable vector-similarity (MaxSim) operators.
+This is a sentence embedding extractor based on the [MPNET Multilingual Base V2](https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2).
+This is a sentence-transformers model: It maps sentences & paragraphs to a 768 dimensional dense vector space and can be used for tasks like clustering or semantic search.
+It's best use case is paraphrasing, but it can also be used for other tasks.
 
 Example input:
 
 ```text
-Hello lovely people!
+Hello World!
 ```
 
 Example output:
@@ -34,7 +35,7 @@ Example output:
 Try out the extractor. Write your favorite (foreign) quote.
 
 ```bash
-cd colbert
+cd mpnet
 indexify extractor extract --text "The quick brown fox jumps over the lazy dog."
 ```
 
@@ -43,5 +44,5 @@ indexify extractor extract --text "The quick brown fox jumps over the lazy dog."
 * The container is not published yet. *
 
 ```bash
-docker run  -it indexify-extractors/colbert extractor extract --text "The quick brown fox jumps over the lazy dog."
+docker run  -it indexify-extractors/mpnet extractor extract --text "The quick brown fox jumps over the lazy dog."
 ```
