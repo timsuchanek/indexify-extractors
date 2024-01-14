@@ -8,23 +8,24 @@ from indexify_extractor_sdk import (
     ExtractorSchema,
 )
 
-from langchain.docstore.document import Document
-
 
 class WikipediaExtractor(Extractor):
     def __init__(self):
         super(WikipediaExtractor, self).__init__()
 
-    def extract(self, html_content: List[Document]) -> List[List[Content]]:
+    def extract(self, html_content: List[Content]) -> List[List[Content]]:
 
         data = []
         for doc in html_content:
-            soup = BeautifulSoup(doc.page_content, "html.parser")
+            soup = BeautifulSoup(doc.data, "html.parser")
             page_content = soup.find("div", {"id": "mw-content-text"})
             if page_content:
                 paragraphs = page_content.find_all("p")
                 data.append(
-                    [Content.from_text(paragraph.text) for paragraph in paragraphs]
+                    [
+                        Content.from_text(paragraph.text, feature=doc.feature)
+                        for paragraph in paragraphs
+                    ]
                 )
             else:
                 data.append([])
