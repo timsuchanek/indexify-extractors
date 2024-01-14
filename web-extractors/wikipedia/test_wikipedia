@@ -1,0 +1,24 @@
+from pathlib import Path
+
+from wikipedia import WikipediaExtractor
+from utils.utils import parse_html_files, save_html_pages
+
+if __name__ == "__main__":
+
+    path = str(Path(__file__).parent) + "/utils/html_pages"
+
+    urls = [
+        "https://en.wikipedia.org/wiki/Stephen_Curry",
+        "https://en.wikipedia.org/wiki/Draymond_Green",
+        "https://en.wikipedia.org/wiki/Klay_Thompson",
+        "https://en.wikipedia.org/wiki/Andre_Iguodala",
+        "https://en.wikipedia.org/wiki/Andrew_Wiggins"
+    ]
+
+    save_html_pages(urls, path)
+    html_files = parse_html_files(path)
+    
+    extractor = WikipediaExtractor()
+    result = extractor.extract(html_files)
+    print(extractor.schemas())
+    print(result)
