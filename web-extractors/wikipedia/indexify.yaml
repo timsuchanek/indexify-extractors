@@ -7,7 +7,6 @@ gpu: false
 # Add all the python dependencies here which are required for the extractor to work
 python_dependencies:
   - beautifulsoup4
-  - langchain 
 # Add all the system dependencies here. We use a ubuntu base image, so the package names
 # should be available in ubuntu
 system_dependencies:

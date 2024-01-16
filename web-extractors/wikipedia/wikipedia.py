@@ -5,7 +5,6 @@ from typing import List
 from indexify_extractor_sdk import (
     Content,
     Extractor,
-    ExtractorSchema,
 )
 
 
@@ -31,10 +30,6 @@ class WikipediaExtractor(Extractor):
                 data.append([])
 
         return data
-
-    @classmethod
-    def schemas(cls) -> ExtractorSchema:
-        ...
 
 
 if __name__ == "__main__":

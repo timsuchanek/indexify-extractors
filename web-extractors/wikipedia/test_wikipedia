@@ -1,24 +1,31 @@
+import unittest
+
 from pathlib import Path
+from typing import List, Type
 
+from indexify_extractor_sdk.base_extractor import Content, Extractor
+from parameterized import parameterized
+from utils.utils import parse_html_files
 from wikipedia import WikipediaExtractor
-from utils.utils import parse_html_files, save_html_pages
 
-if __name__ == "__main__":
 
-    path = str(Path(__file__).parent) + "/utils/html_pages"
+class TestWikipediaExtractor(unittest.TestCase):
+    def __init__(self, *args, **kwargs):
+        super(TestWikipediaExtractor, self).__init__(*args, **kwargs)
+        self.html_content = self._get_html_content()
 
-    urls = [
-        "https://en.wikipedia.org/wiki/Stephen_Curry",
-        "https://en.wikipedia.org/wiki/Draymond_Green",
-        "https://en.wikipedia.org/wiki/Klay_Thompson",
-        "https://en.wikipedia.org/wiki/Andre_Iguodala",
-        "https://en.wikipedia.org/wiki/Andrew_Wiggins"
-    ]
+    def _get_html_content(self) -> List[Content]:
+        path = str(Path(__file__).parent) + "/utils/html_pages"
+        html_files = parse_html_files(path)
+        
+        return html_files
 
-    save_html_pages(urls, path)
-    html_files = parse_html_files(path)
-    
-    extractor = WikipediaExtractor()
-    result = extractor.extract(html_files)
-    print(extractor.schemas())
-    print(result)
+    @parameterized.expand([WikipediaExtractor()])
+    def test_wikipedia_extraction(self, wikipedia_extractor: Type[Extractor]):
+        extracted_content = wikipedia_extractor.extract(self.html_content)
+        self.assertEqual(len(extracted_content), len(self.html_content))
+        self.assertIsNotNone(extracted_content[0])
+
+
+if __name__ == '__main__':
+    unittest.main()
