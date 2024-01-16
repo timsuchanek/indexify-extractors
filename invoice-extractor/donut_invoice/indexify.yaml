@@ -1,4 +1,4 @@
-name: yenicelik/simple-invoice-parser
+name: tensorlake/donut_invoice
 version: 1
 description: "Parses an invoice using the to-be/donut-base-finetuned-invoices huggingface model"
 module: simple_invoice_parser:SimpleInvoiceParserExtractor
@@ -9,11 +9,8 @@ python_dependencies:
   - torchvision
   - Pillow
   - pytesseract
-  - timm
   - sentencepiece
-  - donut-python
   - pdf2image
+  - pydantic
 system_dependencies:
-  - tesseract-ocr
-  - libtesseract-dev
   - poppler-utils

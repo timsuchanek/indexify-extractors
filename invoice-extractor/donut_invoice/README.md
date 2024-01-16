@@ -29,10 +29,10 @@ Example output:
 
 ## Usage
 
-Try out the extractor. Write your favorite (foreign) quote.
+Try out the extractor. Use any invoice you have.
 
 ```bash
-cd invoice-extractor
+cd invoice-extractor/donut_invoice
 indexify extractor extract --file invoice.pdf
 ```
 
@@ -41,5 +41,5 @@ indexify extractor extract --file invoice.pdf
 * The container is not published yet. *
 
 ```bash
-docker run  -it yenicelik/simple-invoice-parser extractor extract --file invoice.pdf
+docker run  -it indexify-extractors/donut_invoice extractor extract --file invoice.pdf
 ```
