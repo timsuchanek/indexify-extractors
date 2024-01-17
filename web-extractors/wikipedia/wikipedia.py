@@ -2,17 +2,23 @@ from bs4 import BeautifulSoup
 from pathlib import Path
 from typing import List
 
+from pydantic import BaseModel
+
 from indexify_extractor_sdk import (
     Content,
     Extractor,
+    ExtractorSchema,
 )
+
+class InputParams(BaseModel):
+    ...
 
 
 class WikipediaExtractor(Extractor):
     def __init__(self):
         super(WikipediaExtractor, self).__init__()
 
-    def extract(self, html_content: List[Content]) -> List[List[Content]]:
+    def extract(self, html_content: List[Content], params: InputParams) -> List[List[Content]]:
 
         data = []
         for doc in html_content:
@@ -30,6 +36,10 @@ class WikipediaExtractor(Extractor):
                 data.append([])
 
         return data
+
+    @classmethod
+    def schemas(cls) -> ExtractorSchema:
+        ...
 
 
 if __name__ == "__main__":
