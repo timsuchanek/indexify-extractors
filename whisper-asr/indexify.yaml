@@ -1,4 +1,4 @@
-name: diptanu/whisper-asr
+name: tensorlake/whisper-asr
 version: 1
 description: "Whisper ASR extracts transcription from audio files"
 # Rename the file and the class name if you wish to
@@ -8,7 +8,8 @@ gpu: false
 python_dependencies:
   - librosa
   - soundfile
-  - accelerate
+  - torch
+  - accelerate[cpu]
 # Add all the system dependencies here. We use a ubuntu base image, so the package names
 # should be available in ubuntu
 system_dependencies:
